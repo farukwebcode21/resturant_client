@@ -3,7 +3,7 @@ import Menuitem from "../../Shared/Menuitem";
 import useMenu from "../../../hooks/useMenu";
 
 const PopularMenu = () => {
-  const [menu, loading] = useMenu();
+  const [menu] = useMenu();
   const popular = menu.filter((item) => item.category === "popular");
 
   return (
@@ -14,6 +14,7 @@ const PopularMenu = () => {
           <Menuitem key={item._id} item={item} />
         ))}
       </div>
+      <button className="border-0 border-b-4 btn btn-outline"> View All</button>
     </section>
   );
 };
