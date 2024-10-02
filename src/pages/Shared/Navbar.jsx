@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <a>Item 1</a>
+        <Link to={"/"}>Home</Link>
       </li>
       <li>
-        <a>Parent</a>
+        <Link to={"/menu"}>Menu</Link>
       </li>
       <li>
         <a>Item 3</a>
@@ -13,7 +15,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="fixed z-10 max-w-screen-xl bg-black border navbar bg-opacity-30 text-wrap ">
+    <div className="fixed z-10 max-w-screen-xl bg-black navbar bg-opacity-30 text-wrap ">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -39,7 +41,7 @@ const Navbar = () => {
             {navOptions}
           </ul>
         </div>
-        <a className="text-xl btn btn-ghost">daisyUI</a>
+        <a className="text-xl btn btn-ghost">Bistro Boss</a>
       </div>
       <div className="hidden navbar-center lg:flex">
         <ul className="px-1 menu menu-horizontal">{navOptions}</ul>
