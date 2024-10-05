@@ -33,9 +33,10 @@ const Menu = () => {
       </Helmet>
       <Cover
         img={menuImage}
-        title={"our menu"}
+        title={"our menu "}
         subTile={"Would you like to try a dish ?"}
-      />
+      >
+      </Cover>
       <SectionTitle subTile={"Don't Miss"} heading={"Today's Offer"} />
       <MenuCategory items={offered} />
       <MenuCategory

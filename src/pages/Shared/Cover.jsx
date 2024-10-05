@@ -1,6 +1,6 @@
 import { Parallax } from "react-parallax";
 
-const Cover = ({ img, title, description }) => {
+const Cover = ({ img, title, description, subTile }) => {
   return (
     <Parallax
       blur={{ min: -1, max: 5 }}
@@ -15,6 +15,7 @@ const Cover = ({ img, title, description }) => {
             <h1 className="mb-5 text-5xl font-bold text-white uppercase">
               {title}
             </h1>
+            {subTile && <h2 className="mb-3 text-2xl text-white">{subTile}</h2>}
             <p className="mb-5">{description}</p>
           </div>
         </div>
