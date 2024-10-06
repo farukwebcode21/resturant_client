@@ -1,7 +1,7 @@
 const FoodCard = ({ item }) => {
   const { name, image, price, recipe } = item;
   return (
-    <div className="">
+    <div className="flex items-center justify-center">
       <div className="shadow-xl card bg-base-100 w-96">
         <figure>
           <img src={image} alt="Shoes" />
@@ -9,11 +9,13 @@ const FoodCard = ({ item }) => {
             ${price}
           </p>
         </figure>
-        <div className="card-body">
-          <h2 className="text-lg font-bold text-center">{name}</h2>
+        <div className="flex flex-col items-center card-body">
+          <h2 className="card-title">{name}</h2>
           <p>{recipe}</p>
           <div className="justify-end card-actions">
-            <button className="btn btn-primary">Add To Card</button>
+            <button className="text-orange-400 border-0 border-b-4 border-orange-500 bg-slate-600 btn-outline btn">
+              Add to Card
+            </button>
           </div>
         </div>
       </div>
