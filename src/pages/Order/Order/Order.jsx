@@ -8,10 +8,14 @@ import OrderTabs from "../OrderTabs";
 import { useParams } from "react-router-dom";
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
-  const [menu] = useMenu();
+  const categoryies = ["salads", "pizzas", "soups", "dessert", "drinks"];
+  console.log("intital".categoryies);
   const { category } = useParams();
-  console.log(category);
+  const initialIndex = categoryies.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
+  console.log("TabIndex", tabIndex);
+  const [menu] = useMenu();
+
   const desserts = menu.filter((item) => item.category === "dessert");
   const soups = menu.filter((item) => item.category === "soup");
   const salads = menu.filter((item) => item.category === "salad");
@@ -26,36 +30,34 @@ const Order = () => {
         subTile={"Would you like to try a dish?"}
       />
 
-      <div>
-        <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-          <TabList
-            role="tablist"
-            className="py-4 mb-4 uppercase tabs tabs-bordered"
-          >
-            <Tab className="tab">salad</Tab>
-            <Tab className="tab">pizza</Tab>
-            <Tab className="tab">soups</Tab>
-            <Tab className="tab">desserts</Tab>
-            <Tab className="tab">drinks</Tab>
-          </TabList>
+      <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+        <TabList
+          role="tablist"
+          className="py-4 mb-4 uppercase tabs tabs-bordered"
+        >
+          <Tab className="tab">salad</Tab>
+          <Tab className="tab">pizza</Tab>
+          <Tab className="tab">soups</Tab>
+          <Tab className="tab">dessert</Tab>
+          <Tab className="tab">drinks</Tab>
+        </TabList>
 
-          <TabPanel>
-            <OrderTabs items={salads} />
-          </TabPanel>
-          <TabPanel>
-            <OrderTabs items={pizzas} />
-          </TabPanel>
-          <TabPanel>
-            <OrderTabs items={soups} />
-          </TabPanel>
-          <TabPanel>
-            <OrderTabs items={desserts} />
-          </TabPanel>
-          <TabPanel>
-            <OrderTabs items={drinks} />
-          </TabPanel>
-        </Tabs>
-      </div>
+        <TabPanel>
+          <OrderTabs items={salads} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTabs items={pizzas} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTabs items={soups} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTabs items={desserts} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTabs items={drinks} />
+        </TabPanel>
+      </Tabs>
     </div>
   );
 };
