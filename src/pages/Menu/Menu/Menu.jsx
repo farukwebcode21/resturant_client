@@ -35,31 +35,30 @@ const Menu = () => {
         img={menuImage}
         title={"our menu "}
         subTile={"Would you like to try a dish ?"}
-      >
-      </Cover>
+      ></Cover>
       <SectionTitle subTile={"Don't Miss"} heading={"Today's Offer"} />
       <MenuCategory items={offered} />
       <MenuCategory
         items={desserts}
-        title={"Dessert"}
+        title={"dessert"}
         description={descriptions.dessert}
         img={dessertImg}
       />
       <MenuCategory
         items={soups}
-        title={"Soups"}
+        title={"soups"}
         description={descriptions.soup}
         img={soupImg}
       />
       <MenuCategory
         items={salads}
-        title={"Salads"}
+        title={"salads"}
         description={descriptions.salad}
         img={saladImg}
       />
       <MenuCategory
         items={pizzas}
-        title={"Pizzas"}
+        title={"pizzas"}
         description={descriptions.pizza}
         img={pizzaImg}
       />
