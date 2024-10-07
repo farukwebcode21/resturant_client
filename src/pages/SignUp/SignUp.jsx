@@ -1,6 +1,6 @@
 import registationImage from "../../assets/others/authentication2.png";
-import "./Login.css";
-const Login = () => {
+
+const SignUp = () => {
   return (
     <div className="min-h-screen hero login-login">
       <div className="flex hero-content ">
@@ -91,4 +91,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
