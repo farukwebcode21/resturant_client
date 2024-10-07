@@ -14,6 +14,15 @@ const OrderTabs = ({ items }) => {
       return '<span class="' + className + '">' + (index + 1) + "</span>";
     },
   };
+  const chunkItems = (array, size) => {
+    const chunked = [];
+    for (let i = 0; i < array.length; i += size) {
+      chunked.push(array.slice(i, i + size));
+    }
+    return chunked;
+  };
+
+  const chunkedItems = chunkItems(items, 6);
 
   return (
     <div>
@@ -22,13 +31,15 @@ const OrderTabs = ({ items }) => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <div className="grid gap-10 md:grid-cols-3">
-            {items.slice(0, 6).map((item) => (
-              <FoodCard key={item._id} item={item} />
-            ))}
-          </div>
-        </SwiperSlide>
+        {chunkedItems.map((chunk, index) => (
+          <SwiperSlide key={index}>
+            <div className="grid gap-10 md:grid-cols-3">
+              {chunk.map((item) => (
+                <FoodCard key={item._id} item={item} />
+              ))}
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
