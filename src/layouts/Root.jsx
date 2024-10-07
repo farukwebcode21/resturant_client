@@ -4,9 +4,12 @@ import Navbar from "../pages/Shared/Navbar";
 
 const Root = () => {
   const location = useLocation();
-  const noHeaderFooter = location.pathname.includes("login");
 
-  console.log(location);
+  // Hide header/footer for both login and signup pages
+  const noHeaderFooter =
+    location.pathname.includes("login") ||
+    location.pathname.includes("sign-up");
+
   return (
     <div>
       {noHeaderFooter || <Navbar />}

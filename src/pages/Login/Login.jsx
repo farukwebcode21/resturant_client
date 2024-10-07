@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import registationImage from "../../assets/others/authentication2.png";
 import "./Login.css";
 const Login = () => {
@@ -68,7 +69,7 @@ const Login = () => {
               </div>
               <div className="space-y-3 text-center">
                 <p className="text-orange-400 ">
-                  Already registered ? <span>Go to login in</span>
+                  New here? <Link to="/sign-up">Create a new account</Link>
                 </p>
                 <p className="font-bold text-black"> Or sign up with</p>
               </div>
