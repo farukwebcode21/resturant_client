@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
 import registationImage from "../../assets/others/authentication2.png";
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  LoadCanvasTemplateNoReload,
-  validateCaptcha,
-} from "react-simple-captcha";
+import { loadCaptchaEnginge, LoadCanvasTemplate } from "react-simple-captcha";
 import "./Login.css";
 import { useEffect } from "react";
 const Login = () => {
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
+
+  const handleLoginUser = (event) => {
+    event.preventDefault();
+  };
   return (
     <div className="min-h-screen hero login-login">
       <div className="flex flex-col md:flex-row hero-content ">
@@ -21,7 +20,7 @@ const Login = () => {
         <div>
           <h1 className="login-text">Login</h1>
           <div className="sign-form">
-            <form className="px-5 py-0 card-body">
+            <form onSubmit={handleLoginUser} className="px-5 py-0 card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="text-black label-text">Email</span>
@@ -61,9 +60,10 @@ const Login = () => {
                   type="text"
                   name="name"
                   placeholder="Type here"
-                  className="bg-white input input-bordered"
+                  className="bg-white input input-bordered mb-3"
                   required
                 />
+                <button className="btn btn-outline btn-sm">Validate</button>
               </div>
               <div className="mt-6 form-control">
                 <button className="sign-btn">Sign In</button>
