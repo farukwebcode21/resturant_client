@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import registationImage from "../../assets/others/authentication2.png";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
 import "./Login.css";
+import { useEffect } from "react";
 const Login = () => {
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
   return (
     <div className="min-h-screen hero login-login">
-      <div className="flex hero-content ">
+      <div className="flex flex-col md:flex-row hero-content ">
         <div className="text-center lg:text-left">
           <img className="w-full" src={registationImage} alt="login" />
         </div>
@@ -42,17 +52,8 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-control">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Type here"
-                  className="bg-white input input-bordered"
-                  required
-                />
-                <label className="label">
-                  <span className="text-blue-700 label-text">
-                    Reload Captcha
-                  </span>
+                <label className="label bg-transparent ">
+                  <LoadCanvasTemplate reloadColor="red" />
                 </label>
               </div>
               <div className="form-control">

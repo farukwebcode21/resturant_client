@@ -2,16 +2,25 @@ import { Link } from "react-router-dom";
 import registationImage from "../../assets/others/authentication2.png";
 
 const SignUp = () => {
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    event.target.reset();
+    console.log(name, email, password);
+  };
+
   return (
     <div className="min-h-screen hero login-login">
-      <div className="flex hero-content ">
-        <div className="text-center lg:text-left">
-          <img className="w-full" src={registationImage} alt="login" />
+      <div className="flex flex-col md:flex-row-reverse hero-content">
+        <div className="text-center md:w-1/2 lg:text-left">
+          <img className="w-full h-auto" src={registationImage} alt="login" />
         </div>
-        <div>
+        <div className="md:w-1/2">
           <h1 className="login-text">Sign Up</h1>
-          <div className="sign-form">
-            <form className="px-5 py-0 card-body">
+          <div className="sign-form ">
+            <form onSubmit={handleRegister} className="px-5 py-0 card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="text-black label-text">Name</span>
