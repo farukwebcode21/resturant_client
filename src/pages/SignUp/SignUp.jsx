@@ -1,14 +1,38 @@
 import { Link } from "react-router-dom";
 import registationImage from "../../assets/others/authentication2.png";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import { useState } from "react";
 
 const SignUp = () => {
-  const handleRegister = (event) => {
+  const { createUser } = useContext(AuthContext);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleRegister = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    event.target.reset();
-    console.log(name, email, password);
+
+    // ! Reset previous messages
+    setSuccessMessage("");
+    setErrorMessage("");
+
+    try {
+      const result = await createUser(email, password);
+      const user = result;
+      // update the user's profile with the name
+      await updateProfile(user, {
+        displayName: name,
+      });
+      setSuccessMessage("User created successfully ! Welcome, " + name);
+    } catch (error) {
+      setErrorMessage("Error Creating user:" + error.message);
+    } finally {
+      event.target.reset();
+    }
   };
 
   return (
@@ -19,6 +43,19 @@ const SignUp = () => {
         </div>
         <div className="md:w-1/2">
           <h1 className="login-text">Sign Up</h1>
+          {/* Display Success Message */}
+          {successMessage && (
+            <div className="alert alert-success">
+              <p>{successMessage}</p>
+            </div>
+          )}
+
+          {/* Display Error Message */}
+          {errorMessage && (
+            <div className="alert alert-error">
+              <p>{errorMessage}</p>
+            </div>
+          )}
           <div className="sign-form ">
             <form onSubmit={handleRegister} className="px-5 py-0 card-body">
               <div className="form-control">

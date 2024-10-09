@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { useEffect } from "react";
@@ -25,10 +26,13 @@ const AuthProvider = ({ children }) => {
         password
       );
       setUser(result.user); //start loading
+      console.log("User created successfully", result.user);
       return result.user;
     } catch (error) {
-      console.log("Error create user accound", error);
+      console.error("Error create user accound", error);
       throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,10 +45,25 @@ const AuthProvider = ({ children }) => {
       setUser(result.user); // update the user state
       return result.user;
     } catch (error) {
-      console.log("Error signing in user", error);
+      console.error("Error signing in user", error);
       throw error;
     } finally {
       setLoading(false); //always stop loading
+    }
+  };
+
+  //   TODO LogOut user
+
+  const logOut = async () => {
+    setLoading(true);
+    try {
+      await signOut(auth);
+      setUser(null);
+      console.log("User logged out successfully");
+    } catch (error) {
+      console.error("User logout Failed", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -66,6 +85,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     signInUser,
     loading,
+    logOut,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
