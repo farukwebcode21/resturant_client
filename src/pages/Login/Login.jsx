@@ -1,25 +1,46 @@
 import { Link } from "react-router-dom";
 import registationImage from "../../assets/others/authentication2.png";
-import { loadCaptchaEnginge, LoadCanvasTemplate } from "react-simple-captcha";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 import "./Login.css";
 import { useEffect } from "react";
+import { useRef } from "react";
+import { useState } from "react";
 const Login = () => {
+  const captchaRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+
+  const handleValidateCaptcha = (event) => {
+    event.preventDefault();
+    const user_captcha_value = captchaRef.current.value;
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
+
+  const handleLoginUser = (event) => {
+    event.preventDefault();
+    console.log("clicking ");
+  };
+
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
 
-  const handleLoginUser = (event) => {
-    event.preventDefault();
-  };
   return (
     <div className="min-h-screen hero login-login">
       <div className="flex flex-col md:flex-row hero-content ">
-        <div className="text-center lg:text-left">
+        <div className="text-center w-1/2 lg:text-left">
           <img className="w-full" src={registationImage} alt="login" />
         </div>
         <div>
           <h1 className="login-text">Login</h1>
-          <div className="sign-form">
+          <div className="sign-form w-1/2">
             <form onSubmit={handleLoginUser} className="px-5 py-0 card-body">
               <div className="form-control">
                 <label className="label">
@@ -54,19 +75,29 @@ const Login = () => {
                 <label className="label bg-transparent ">
                   <LoadCanvasTemplate reloadColor="red" />
                 </label>
-              </div>
-              <div className="form-control">
                 <input
                   type="text"
-                  name="name"
-                  placeholder="Type here"
+                  name="captcha"
+                  ref={captchaRef}
+                  placeholder="Type captcha"
                   className="bg-white input input-bordered mb-3"
                   required
                 />
-                <button className="btn btn-outline btn-sm">Validate</button>
+                <button
+                  onClick={handleValidateCaptcha}
+                  className="btn btn-outline btn-xs"
+                >
+                  Validate
+                </button>
               </div>
+
               <div className="mt-6 form-control">
-                <button className="sign-btn">Sign In</button>
+                <input
+                  type="submit"
+                  disabled={disabled}
+                  value="Sign In"
+                  className="btn btn-primary"
+                />
               </div>
               <div className="space-y-3 text-center">
                 <p className="text-orange-400 ">
