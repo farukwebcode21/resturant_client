@@ -9,9 +9,12 @@ import "./Login.css";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 const Login = () => {
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
+  const { signInUser } = useContext(AuthContext);
 
   const handleValidateCaptcha = (event) => {
     event.preventDefault();
@@ -23,9 +26,18 @@ const Login = () => {
     }
   };
 
-  const handleLoginUser = (event) => {
+  const handleLoginUser = async (event) => {
     event.preventDefault();
-    console.log("clicking ");
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log("clicking ", email, password);
+    try {
+      const result = await signInUser(email, password);
+      const userEmail = result.email;
+      console.log("Login successfully:", userEmail);
+    } catch (error) {
+      console.error("Sign in user :", error);
+    }
   };
 
   useEffect(() => {
