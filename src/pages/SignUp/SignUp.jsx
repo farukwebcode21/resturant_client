@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import registationImage from "../../assets/others/authentication2.png";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -30,6 +31,7 @@ const SignUp = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/");
         })
         .catch((error) => {
           console.error(error.message);

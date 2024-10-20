@@ -37,6 +37,7 @@ const Login = () => {
     try {
       const result = await signInUser(email, password);
       const userEmail = result.email;
+      console.log(userEmail);
       Swal.fire({
         position: "top-end",
         icon: "success",

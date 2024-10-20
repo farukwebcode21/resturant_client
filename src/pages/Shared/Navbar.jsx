@@ -72,7 +72,7 @@ const Navbar = () => {
             <button onClick={handleLogOut} className="btn btn-ghost">
               LogOut
             </button>
-            <span className="text-pink-600">{user.email}</span>
+            <span className="text-pink-600">{user?.displayName}</span>
           </div>
         ) : (
           <div className="flex gap-6">
