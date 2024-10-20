@@ -121,10 +121,10 @@ const Login = () => {
             <div className="logo-div">
               <a className="social-login" href="">
                 F
-              </a>{" "}
+              </a>
               <a className="social-login" href="">
                 G
-              </a>{" "}
+              </a>
               <a className="social-login" href="">
                 G
               </a>
