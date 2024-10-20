@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { useEffect } from "react";
@@ -67,6 +68,18 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  // ! UPDATE USER PROFILE
+  const updateUserProfile = async (name, photo) => {
+    try {
+      return await updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: photo,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // ! USER TRACKING
 
   useEffect(() => {
@@ -86,6 +99,7 @@ const AuthProvider = ({ children }) => {
     signInUser,
     loading,
     logOut,
+    updateUserProfile,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
