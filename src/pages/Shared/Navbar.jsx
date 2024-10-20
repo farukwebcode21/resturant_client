@@ -1,6 +1,26 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User LogOut Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   const navOptions = (
     <>
       <li>
@@ -11,12 +31,6 @@ const Navbar = () => {
       </li>
       <li>
         <Link to={"/order/salads"}>Order Food</Link>
-      </li>
-      <li>
-        <Link to={"/login"}>Login</Link>
-      </li>
-      <li>
-        <Link to={"/sign-up"}>Sign Up</Link>
       </li>
     </>
   );
@@ -53,7 +67,23 @@ const Navbar = () => {
         <ul className="px-1 menu menu-horizontal">{navOptions}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? (
+          <div className=" flex justify-center items-center gap-5">
+            <button onClick={handleLogOut} className="btn btn-ghost">
+              LogOut
+            </button>
+            <span className="text-pink-600">{user.email}</span>
+          </div>
+        ) : (
+          <div className="flex gap-6">
+            <li className="list-none hover:text-yellow-500">
+              <Link to={"/login"}>Login</Link>
+            </li>
+            <li className="list-none hover:text-yellow-500">
+              <Link to={"/sign-up"}>Sign Up</Link>
+            </li>
+          </div>
+        )}
       </div>
     </div>
   );
