@@ -4,7 +4,8 @@ import Home from "../pages/Home/Home/Home";
 import Menu from "../pages/Menu/Menu/Menu";
 import Order from "../pages/Order/Order/Order";
 import Login from "../pages/Login/Login";
-import SignUp from '../pages/SignUp/SignUp';
+import SignUp from "../pages/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -13,9 +14,16 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "menu", element: <Menu /> },
-      { path: "order/:category", element: <Order /> },
+      {
+        path: "order/:category",
+        element: (
+          <PrivateRoute>
+            <Order />
+          </PrivateRoute>
+        ),
+      },
       { path: "login", element: <Login /> },
-      { path: "sign-up", element: <SignUp/>},
+      { path: "sign-up", element: <SignUp /> },
     ],
   },
 ]);

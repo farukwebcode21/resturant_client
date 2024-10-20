@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import registationImage from "../../assets/others/authentication2.png";
@@ -15,6 +15,9 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { signInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleValidateCaptcha = (event) => {
     event.preventDefault();
@@ -41,6 +44,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      navigate(from, { replace: true });
     } catch (error) {
       console.error("Sign in user :", error);
     }
