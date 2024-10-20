@@ -61,16 +61,45 @@ const SignUp = () => {
                     required: true,
                     minLength: 6,
                     maxLength: 20,
+                    pattern:
+                      /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
                   })}
                   type="password"
                   name="password"
                   placeholder="Type here"
                   className="bg-white input input-bordered"
                 />
-                {errors.password && (
+                {errors.password?.type === "required" && (
                   <span className="text-pink-700">
-                    Password field is required
+                    Password must be required
                   </span>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <span className="text-pink-700">
+                    Password must be 6 required
+                  </span>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <span className="text-pink-700">
+                    Password must be less than 20 required
+                  </span>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <>
+                    <span className="text-pink-700">
+                      At least one lowercase letter.
+                    </span>
+                    <span className="text-pink-700">
+                      At least one uppercase letter
+                    </span>
+                    <span className="text-pink-700">At least one digit.</span>
+                    <span className="text-pink-700">
+                      At least one special character.
+                    </span>
+                    <span className="text-pink-700">
+                      less thand 20 character
+                    </span>
+                  </>
                 )}
               </div>
               <div className="mt-6 form-control">
