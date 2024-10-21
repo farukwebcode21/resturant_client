@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { MdShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -72,10 +73,9 @@ const Navbar = () => {
             <button onClick={handleLogOut} className="btn btn-ghost">
               LogOut
             </button>
-            <span className="text-pink-600">{user?.displayName}</span>
           </div>
         ) : (
-          <div className="flex gap-6">
+          <div className="flex gap-6 justify-center items-center">
             <li className="list-none hover:text-yellow-500">
               <Link to={"/login"}>Login</Link>
             </li>
@@ -84,6 +84,12 @@ const Navbar = () => {
             </li>
           </div>
         )}
+        <div>
+          <button className="btn btn-link">
+            <MdShoppingCart />
+            <div className="badge badge-secondary">+0</div>
+          </button>
+        </div>
       </div>
     </div>
   );
