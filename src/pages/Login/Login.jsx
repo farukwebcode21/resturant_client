@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import registationImage from "../../assets/others/authentication2.png";
+import { FaFacebookF } from "react-icons/fa";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -12,6 +13,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { signInUser } = useContext(AuthContext);
@@ -126,8 +128,8 @@ const Login = () => {
                 </div>
               </form>
               <div className="logo-div">
-                <a className="social-login" href="">
-                  F
+                <a className="btn btn-circle bg-[#1877F2]" href="">
+                  <FaFacebookF size={30} />
                 </a>
                 <a className="social-login" href="">
                   G

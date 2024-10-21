@@ -23,9 +23,9 @@
 .sign-btn {
   @apply bg-[#D1A054] text-white font-bold py-3 hover:bg-black;
 }
-.social-login {
+/* .social-login {
   @apply w-10 h-10 py-2 text-center border border-black rounded-full hover:font-bold hover:border-orange-600 hover:text-black;
-}
+} */
 
 .logo-div {
   @apply flex items-center justify-center py-5 space-x-11;
