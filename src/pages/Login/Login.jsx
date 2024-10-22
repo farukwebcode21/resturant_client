@@ -21,6 +21,8 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  console.log("state location pathName", location.state);
+
   const handleValidateCaptcha = (event) => {
     event.preventDefault();
     const user_captcha_value = event.target.value;
@@ -108,14 +110,13 @@ const Login = () => {
                     name="captcha"
                     placeholder="Type captcha"
                     className="bg-white input input-bordered mb-3"
-                    required
                   />
                 </div>
-
+                {/*TODO: applay disable for re captch  */}
                 <div className="mt-6 form-control">
                   <input
                     type="submit"
-                    disabled={disabled}
+                    disabled={false}
                     value="Sign In"
                     className="btn btn-primary"
                   />
