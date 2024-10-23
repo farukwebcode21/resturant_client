@@ -7,6 +7,7 @@ const Cart = () => {
   const [cart, refetch] = useCart();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
   const axiosSecure = useAxiosSecure();
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -18,24 +19,44 @@ const Cart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Swal.fire({
-        //   title: "Deleted!",
-        //   text: "Your file has been deleted.",
-        //   icon: "success",
-        // });
-        axiosSecure.delete(`/carts/${id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            refetch();
+        console.log(result); // To log the confirmation details
+
+        // Send DELETE request using axiosSecure
+        axiosSecure
+          .delete(`/carts/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              // Refetch the cart or items to reflect the deletion
+              refetch();
+
+              // Show success alert
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            } else {
+              // If deletion fails, notify the user
+              Swal.fire({
+                title: "Error",
+                text: "The item could not be deleted.",
+                icon: "error",
+              });
+            }
+          })
+          .catch((error) => {
+            // Handle error during the DELETE request
+            console.error("Error deleting item:", error);
             Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
+              title: "Error",
+              text: "There was an issue deleting the item.",
+              icon: "error",
             });
-          }
-        });
+          });
       }
     });
   };
+
   return (
     <section className="">
       <div className="flex justify-between items-center uppercase bg-white p-2 mb-2 ">
