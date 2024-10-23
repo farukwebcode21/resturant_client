@@ -1,6 +1,5 @@
 import {
   FaAddressCard,
-  FaBookDead,
   FaCalendar,
   FaHome,
   FaList,
@@ -9,7 +8,7 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import { MdContactMail, MdContacts, MdOutlinePayment } from "react-icons/md";
+import { MdContactMail, MdOutlinePayment } from "react-icons/md";
 
 const Dashboard = () => {
   return (
@@ -81,7 +80,7 @@ const Dashboard = () => {
         </ul>
       </div>
       {/* dashboard content */}
-      <div className="flex-1 p-5">
+      <div className="flex-1 p-5 bg-white">
         <Outlet />
       </div>
     </div>
