@@ -87,10 +87,12 @@ const Navbar = () => {
           </div>
         )}
         <div>
-          <button className="btn btn-link">
-            <MdShoppingCart />
-            <div className="badge badge-secondary">+{cart.length}</div>
-          </button>
+          <Link to={"/dashboard/cart"}>
+            <button className="btn btn-link">
+              <MdShoppingCart />
+              <div className="badge badge-secondary">+{cart.length}</div>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
