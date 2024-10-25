@@ -61,13 +61,13 @@ const Cart = () => {
     <section className="">
       <div className="flex justify-between items-center uppercase bg-white p-2 mb-2 ">
         <h2 className="text-xl text-black">Items:{cart.length}</h2>
-        <h2 className="text-xl text-black">Total Price:{totalPrice}</h2>
+        <h2 className="text-xl text-black">Total Price:${totalPrice}</h2>
         <button className="btn btn-warning  text-black ">Pay</button>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto ">
         <table className="table">
           {/* head */}
-          <thead className="bg-orange-500 text-white uppercase ">
+          <thead className="bg-gray-500 text-white uppercase ">
             <tr>
               <th>SL</th>
               <th>Item Image</th>

@@ -25,11 +25,11 @@ const OrderTabs = ({ items }) => {
   const chunkedItems = chunkItems(items, 6);
 
   return (
-    <div>
+    <div className="mb-7">
       <Swiper
         pagination={pagination}
         modules={[Pagination]}
-        className="mySwiper"
+        className="mySwiper py-10"
       >
         {chunkedItems.map((chunk, index) => (
           <SwiperSlide key={index}>
