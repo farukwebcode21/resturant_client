@@ -13,6 +13,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Facebook from "../../components/SocialLogin/Facebook";
+import Google from "../../components/SocialLogin/Google";
+import GithubLogin from "../../components/SocialLogin/GithubLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -130,15 +133,9 @@ const Login = () => {
               </form>
 
               <div className="social_icon">
-                <a className="icon-style bg-[#1877F2]" href="">
-                  <FaFacebookF size={25} />
-                </a>
-                <a className="icon-style bg-orange-500" href="">
-                  <FaGoogle size={25} />
-                </a>
-                <a className="icon-style bg-gray-600" href="">
-                  <FaGithub size={25} />
-                </a>
+                <Facebook />
+                <Google />
+                <GithubLogin />
               </div>
             </div>
           </div>

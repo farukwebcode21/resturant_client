@@ -2,8 +2,10 @@ import { useState } from "react";
 import { createContext } from "react";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -15,6 +17,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const googleProvider = new GoogleAuthProvider();
 
   //   TODO: CREATE USER ACCOUNT IN FIREBASE
 
@@ -50,6 +53,17 @@ const AuthProvider = ({ children }) => {
       throw error;
     } finally {
       setLoading(false); //always stop loading
+    }
+  };
+
+  const googleSign = async () => {
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      setUser(result.user);
+      return result.user;
+    } catch (error) {
+      console.log("Google SignIn Message:", error);
     }
   };
 
@@ -100,6 +114,7 @@ const AuthProvider = ({ children }) => {
     loading,
     logOut,
     updateUserProfile,
+    googleSign,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
