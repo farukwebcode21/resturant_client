@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import registationImage from "../../assets/others/authentication2.png";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -64,12 +64,12 @@ const Login = () => {
       <Helmet title="Bistro Boss | Login" />
       <div className="min-h-screen hero login-login">
         <div className="flex flex-col md:flex-row hero-content ">
-          <div className="text-center w-1/2 lg:text-left">
-            <img className="w-full" src={registationImage} alt="login" />
+          <div className="text-center md:w-1/2 lg:text-left">
+            <img className="lg:w-full" src={registationImage} alt="login" />
           </div>
-          <div>
+          <div className="md:w-1/2">
             <h1 className="login-text">Login</h1>
-            <div className="sign-form w-1/2">
+            <div className="sign-form">
               <form onSubmit={handleLoginUser} className="px-5 py-0 card-body">
                 <div className="form-control">
                   <label className="label">
@@ -125,18 +125,19 @@ const Login = () => {
                   <p className="text-orange-400 ">
                     New here? <Link to="/sign-up">Create a new account</Link>
                   </p>
-                  <p className="font-bold text-black"> Or sign up with</p>
+                  <div className="divider divider-neutral text-black">OR</div>
                 </div>
               </form>
-              <div className="logo-div">
-                <a className="btn btn-circle bg-[#1877F2]" href="">
-                  <FaFacebookF size={30} />
+
+              <div className="social_icon">
+                <a className="icon-style bg-[#1877F2]" href="">
+                  <FaFacebookF size={25} />
                 </a>
-                <a className="social-login" href="">
-                  G
+                <a className="icon-style bg-orange-500" href="">
+                  <FaGoogle size={25} />
                 </a>
-                <a className="social-login" href="">
-                  G
+                <a className="icon-style bg-gray-600" href="">
+                  <FaGithub size={25} />
                 </a>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
 
 const SignUp = () => {
   const axiosPublic = useAxiosPublic();
@@ -175,18 +176,18 @@ const SignUp = () => {
                   <p className="text-orange-400 ">
                     Already registered ? <Link to="/login">Go to login in</Link>
                   </p>
-                  <p className="font-bold text-black"> Or sign up with</p>
+                  <div className="divider divider-neutral text-black">OR</div>
                 </div>
               </form>
-              <div className="logo-div">
-                <a className="social-login" href="">
-                  F
-                </a>{" "}
-                <a className="social-login" href="">
-                  G
-                </a>{" "}
-                <a className="social-login" href="">
-                  G
+              <div className="social_icon">
+                <a className="icon-style bg-[#1877F2]" href="">
+                  <FaFacebookF size={25} />
+                </a>
+                <a className="icon-style bg-orange-500" href="">
+                  <FaGoogle size={25} />
+                </a>
+                <a className="icon-style bg-gray-600" href="">
+                  <FaGithub size={25} />
                 </a>
               </div>
             </div>
