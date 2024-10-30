@@ -2,16 +2,70 @@ import { FaRegTrashAlt, FaUser } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
+
+  const handleMakeAdmin =(user)=>{
+    
+  }
+
+  const handleDeleteUser = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(result); // To log the confirmation details
+
+        // Send DELETE request using axiosSecure
+        axiosSecure
+          .delete(`/users/${user._id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              // Refetch the cart or items to reflect the deletion
+              refetch();
+
+              // Show success alert
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            } else {
+              // If deletion fails, notify the user
+              Swal.fire({
+                title: "Error",
+                text: "The item could not be deleted.",
+                icon: "error",
+              });
+            }
+          })
+          .catch((error) => {
+            // Handle error during the DELETE request
+            console.error("Error deleting item:", error);
+            Swal.fire({
+              title: "Error",
+              text: "There was an issue deleting the item.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
   return (
     <section className="">
       <SectionTitle subTile={"How Many ?"} heading={"Manage All Users"} />
@@ -39,12 +93,15 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button className="btn btn-ghost bg-orange-400 hover:bg-orange-800">
+                  <button onClick={()=>handleMakeAdmin(user)} className="btn btn-ghost bg-orange-400 hover:bg-orange-800">
                     <FaUser className="text-white" />
                   </button>
                 </td>
                 <th>
-                  <button className="btn btn-ghost btn-lg">
+                  <button
+                    onClick={() => handleDeleteUser(user)}
+                    className="btn btn-ghost btn-lg"
+                  >
                     <FaRegTrashAlt className="text-red-600" />
                   </button>
                 </th>
