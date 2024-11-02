@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { useEffect } from "react";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
+  const axiosPublic = useAxiosPublic();
 
   //   TODO: CREATE USER ACCOUNT IN FIREBASE
 
@@ -99,7 +101,19 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("Current user", currentUser);
+      if (currentUser) {
+        // get tken and store client
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("token", res.data.token);
+          }
+        });
+      } else {
+        // do something
+
+        localStorage.removeItem("token");
+      }
       setLoading(false);
     });
     return () => {
