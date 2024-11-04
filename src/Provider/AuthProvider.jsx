@@ -106,13 +106,13 @@ const AuthProvider = ({ children }) => {
         const userInfo = { email: currentUser.email };
         axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
-            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("access_token", res.data.token);
           }
         });
       } else {
         // do something
 
-        localStorage.removeItem("token");
+        localStorage.removeItem("access_token");
       }
       setLoading(false);
     });

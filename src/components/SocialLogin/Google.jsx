@@ -27,7 +27,10 @@ const Google = () => {
       });
   };
   return (
-    <p onClick={handleGoogleLogin} className="icon-style bg-orange-500">
+    <p
+      onClick={handleGoogleLogin}
+      className="icon-style bg-orange-500 cursor-pointer"
+    >
       <FaGoogle size={25} />
     </p>
   );

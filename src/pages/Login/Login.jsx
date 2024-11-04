@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import registationImage from "../../assets/others/authentication2.png";
-import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
+
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
